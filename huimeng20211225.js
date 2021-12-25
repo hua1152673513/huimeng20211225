@@ -80,15 +80,15 @@ for(var i = 0;i<len;i++){
           if(da.includes("正确答案是：")){
               da = da.split("正确答案是：")[1]
               console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
-              //add(tm,da);
+              add(tm,da);
           }else if(da.includes("答案：")){
              da = da.split("答案：")[1]
              console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
-             //add(tm,da);
+             add(tm,da);
           }else if(da.includes("正确答案是")){
              da = da.split("正确答案是")[1]
              console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
-             //add(tm,da);
+             add(tm,da);
           }else if(da=="你的回答正确"){
 
               var da1 = $(".deferredfeedback").eq(i).children().eq(1).children().eq(0).children().eq(3).children().eq(1).children().eq(0).attr("class")
@@ -142,7 +142,7 @@ for(var i = 0;i<len;i++){
 
               if(da.replace(/\s*/g,"")!=""){
                   console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
-                  //add(tm,da);
+                  add(tm,da);
               }
           }
 
@@ -289,7 +289,7 @@ for(var i = 0;i<len;i++){
 
               if(da.replace(/\s*/g,"")!=""){
                   console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
-                  //add(tm,da);
+                  add(tm,da);
               }
 
           }
