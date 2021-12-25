@@ -3,10 +3,10 @@
 // @name            绘梦娱乐脚本测试版本20211225
 // @namespace       [url=mailto:1152673513@qq.com]1152673513@qq.com[/url]
 // @author          Mrs'Shen
-// @description     绘梦娱乐脚本测试版本20211225
+// @description     绘梦娱乐脚本测试版本202112251502
 // @match           *://*.ouchn.cn/*
 // @require         http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js
-// @version         0.0.1
+// @version         0.0.2
 // @grant           GM_addStyle
 // @run-at          document-end
 // @grant           unsafeWindow
@@ -42,52 +42,30 @@ for(var i = 0;i<len;i++){
       tm = $(".deferredfeedback").eq(i).children().eq(1).children().eq(0).text().split("试题正文")[1]
       da = $(".deferredfeedback").eq(i).children().eq(1).children().eq(1).text().split("反馈")[1]
 
-      var t1 = tm.substr(0, 1)//以0-9开头1.jhhjghjgb
-      var t2 = tm.substr(0, 2)//以10-99开头
-      var t3 = tm.substr(0, 3)//以100-999开头
-      var t4 = tm.substr(0, 4)//以1000-9999开头
-      var t5 = tm.substr(0, 5)//以10000-99999开头
-      var tf1 =  Number(t1)
-      var tf2 =  Number(t2)
-      var tf3 =  Number(t3)
-      var tf4 =  Number(t4)
-      var tf5 =  Number(t5)
-      if(!isNaN(tf1)&&tm.startsWith(t1+".")){
-          tm = tm.substr(2, tm.length)
-      }else if(!isNaN(tf2)&&tm.startsWith(t2+".")){
-          tm = tm.substr(3, tm.length)
-      }else if(!isNaN(tf3)&&tm.startsWith(t3+".")){
-          tm = tm.substr(4, tm.length)
-      }else if(!isNaN(tf4)&&tm.startsWith(t4+".")){
-          tm = tm.substr(5, tm.length)
-      }else if(!isNaN(tf5)&&tm.startsWith(t5+".")){
-          tm = tm.substr(6, tm.length)
-      }else if(!isNaN(tf5)&&tm.startsWith(t5)){
-          tm = tm.substr(5, tm.length)
-      }else if(!isNaN(tf4)&&tm.startsWith(t4)){
-          tm = tm.substr(4, tm.length)
-      }else if(!isNaN(tf3)&&tm.startsWith(t3)){
-          tm = tm.substr(3, tm.length)
-      }else if(!isNaN(tf2)&&tm.startsWith(t2)){
-          tm = tm.substr(2, tm.length)
-      }else if(!isNaN(tf1)&&tm.startsWith(t1)){
-          tm = tm.substr(1, tm.length)
-      }
+       if(tm.substr(0,6).includes("．")){
+
+           tm = tm.substr(tm.indexOf("．")+1,tm.length)
+
+       }else if(tm.substr(0,6).includes(".")){
+
+           tm = tm.substr(tm.indexOf(".")+1,tm.length)
+
+       }
 
       if(tm!=null&&da!=null&&tm!=undefined&&da!=undefined&&tm!=""&&da!=""){
 
           //选择题区域
           if(da.includes("正确答案是：")){
               da = da.split("正确答案是：")[1]
-              console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
+              console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
               add(tm,da);
           }else if(da.includes("答案：")){
              da = da.split("答案：")[1]
-             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
+             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
              add(tm,da);
           }else if(da.includes("正确答案是")){
              da = da.split("正确答案是")[1]
-             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
+             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
              add(tm,da);
           }else if(da=="你的回答正确"){
 
@@ -141,7 +119,7 @@ for(var i = 0;i<len;i++){
               da = da1 + da2 + da3 + da4 + da5
 
               if(da.replace(/\s*/g,"")!=""){
-                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
+                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
                   add(tm,da);
               }
           }
@@ -288,7 +266,7 @@ for(var i = 0;i<len;i++){
               da = pd1 + pd2 + pd3 +" "+ pd4 +" "+ pd5 +" "+ pd6 +" "+ pd7 +" "+ pd8 +" "+ pd9
 
               if(da.replace(/\s*/g,"")!=""){
-                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案："+da+"\n")
+                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
                   add(tm,da);
               }
 
