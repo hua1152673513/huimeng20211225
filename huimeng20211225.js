@@ -3,10 +3,10 @@
 // @name            绘梦娱乐脚本测试版本20211225
 // @namespace       [url=mailto:1152673513@qq.com]1152673513@qq.com[/url]
 // @author          Mrs'Shen
-// @description     绘梦娱乐脚本测试版本202112251502
+// @description     绘梦娱乐脚本测试版本202112252038
 // @match           *://*.ouchn.cn/*
 // @require         http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js
-// @version         0.0.2
+// @version         0.0.3
 // @grant           GM_addStyle
 // @run-at          document-end
 // @grant           unsafeWindow
@@ -57,16 +57,16 @@ for(var i = 0;i<len;i++){
           //选择题区域
           if(da.includes("正确答案是：")){
               da = da.split("正确答案是：")[1]
-              console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
-              add(tm,da);
+              console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
+              //add(tm,da);
           }else if(da.includes("答案：")){
              da = da.split("答案：")[1]
-             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
-             add(tm,da);
+             console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
+             //add(tm,da);
           }else if(da.includes("正确答案是")){
              da = da.split("正确答案是")[1]
-             console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
-             add(tm,da);
+             console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
+             //add(tm,da);
           }else if(da=="你的回答正确"){
 
               var da1 = $(".deferredfeedback").eq(i).children().eq(1).children().eq(0).children().eq(3).children().eq(1).children().eq(0).attr("class")
@@ -119,8 +119,8 @@ for(var i = 0;i<len;i++){
               da = da1 + da2 + da3 + da4 + da5
 
               if(da.replace(/\s*/g,"")!=""){
-                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
-                  add(tm,da);
+                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
+                  //add(tm,da);
               }
           }
 
@@ -266,8 +266,8 @@ for(var i = 0;i<len;i++){
               da = pd1 + pd2 + pd3 +" "+ pd4 +" "+ pd5 +" "+ pd6 +" "+ pd7 +" "+ pd8 +" "+ pd9
 
               if(da.replace(/\s*/g,"")!=""){
-                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n"+"答案：\n"+da+"\n")
-                  add(tm,da);
+                  console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
+                  //add(tm,da);
               }
 
           }
