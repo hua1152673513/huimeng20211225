@@ -6,7 +6,8 @@
 // @description     绘梦娱乐脚本测试版本202112252038
 // @match           *://*.ouchn.cn/*
 // @require         http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js
-// @version         0.0.3
+// @homepageURL     https://greasyfork.org/zh-CN
+// @version         1.1.5
 // @grant           GM_addStyle
 // @run-at          document-end
 // @grant           unsafeWindow
@@ -22,21 +23,42 @@
     var da;
     var len = $(".deferredfeedback").length
 function add(question,answer){
-    //var data = 'timu='+question+'&daan='+answer+'';
     var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-    httpRequest.open('POST','http://tk.shen668.cn/wkapiadd.php', true); //第二步：打开连接
+    httpRequest.open('POST','http://uptk.shen668.cn/wkapiadd.php', true); //第二步：打开连接
     httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=utf-8");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
     httpRequest.send("timu="+question+"&daan="+answer+"");//发送请求 将情头体写在send中
-/**
- * 获取数据后的处理程序
- */
+    /**
+    * 获取数据后的处理程序
+    */
     httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
     if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
         var json = httpRequest.responseText;//获取到服务端返回的数据
-        console.log(json);
+        var addres = JSON.parse(json).ad
+        console.log("服务器返回录入结果："+addres);
     }}
  };
 
+function search(question,da){
+        var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+        httpRequest.open('POST','http://byg.shen668.cn/wkapisql.php', true); //第二步：打开连接
+        httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=utf-8");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send("tm="+question);//发送请求 将情头体写在send中
+        /**
+ * 获取数据后的处理程序
+ */
+        httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                var json = httpRequest.responseText;//获取到服务端返回的数据
+                var srhtimu = JSON.parse(json).tm
+                var srhdaan = JSON.parse(json).answer
+                console.log("服务器返回题目："+srhtimu);
+                console.log("服务器返回答案："+srhdaan);
+                if(srhdaan.includes("题库未收录该题")){
+                         //console.log("当前为录题界面！")
+                         add(srhtimu,da)
+                }
+            }}
+};
 
 for(var i = 0;i<len;i++){
       tm = $(".deferredfeedback").eq(i).children().eq(1).children().eq(0).text().split("试题正文")[1]
@@ -58,15 +80,15 @@ for(var i = 0;i<len;i++){
           if(da.includes("正确答案是：")){
               da = da.split("正确答案是：")[1]
               console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
-              //add(tm,da);
+              search(tm.replace(/\s*/g,""),da);
           }else if(da.includes("答案：")){
              da = da.split("答案：")[1]
              console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
-             //add(tm,da);
+             search(tm.replace(/\s*/g,""),da);
           }else if(da.includes("正确答案是")){
              da = da.split("正确答案是")[1]
              console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
-             //add(tm,da);
+             search(tm.replace(/\s*/g,""),da);
           }else if(da=="你的回答正确"){
 
               var da1 = $(".deferredfeedback").eq(i).children().eq(1).children().eq(0).children().eq(3).children().eq(1).children().eq(0).attr("class")
@@ -120,7 +142,7 @@ for(var i = 0;i<len;i++){
 
               if(da.replace(/\s*/g,"")!=""){
                   console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
-                  //add(tm,da);
+                  search(tm.replace(/\s*/g,""),da);
               }
           }
 
@@ -267,14 +289,12 @@ for(var i = 0;i<len;i++){
 
               if(da.replace(/\s*/g,"")!=""){
                   console.log("第"+(i+1)+"题题目：\n"+tm+"\n\n"+"答案："+da)
-                  //add(tm,da);
+                  add(tm.replace(/\s*/g,""),da);
               }
 
           }
 
  };
-
-
 
 })();
 
